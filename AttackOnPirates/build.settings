@@ -1,0 +1,29 @@
+settings =
+{
+   android =
+   {
+      usesPermissions =
+      {
+         "android.permission.INTERNET"
+      }
+   },
+
+   iphone =
+   {
+      plist =
+      {
+         UIAppFonts = 
+         {
+            "Impact.ttf"
+         }
+      }
+   },
+
+   --[[
+   plugins =
+   {
+      ["plugin.openssl"] = { publisherId = "com.coronalabs" }
+   }
+   --]]
+
+}
