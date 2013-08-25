@@ -16,6 +16,6 @@ Also, you can check out the game trailer from [Youtube](https://www.youtube.com/
 Enjoy! :)
 
 
-ACKNOWLEDGEMENT:
-================
+ACKNOWLEDGEMENT
+===============
 I would also like to acknowledge *Coffee Games* for their support and partnership.
