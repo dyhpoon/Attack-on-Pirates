@@ -1,7 +1,7 @@
 ABOUT
 =====
 
-This is a mobile game called "Attach on Pirates" which I wrote from June 2013 to Aug 2013. 
+This is a mobile game called "Attack on Pirates" which I wrote from June 2013 to Aug 2013. 
 
 This game is free download and will be available in app store very soon.
 
