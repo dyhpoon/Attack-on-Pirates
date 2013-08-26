@@ -9,7 +9,7 @@ Meanwhile, you can check out some code of this game in this repository.
 
 Note that some codes, images and audio are not disclosed as they are copyrighted.
 
-However, you can get a glimpse of the gameplay by downloading the **sample.apk** to your Android devices.
+However, you can get a glimpse of the gameplay by downloading the [sample.apk](https://github.com/dyhpoon/game-project/raw/master/sample.apk) to your Android devices.
 
 Also, you can check out the game trailer in the following: 
 
