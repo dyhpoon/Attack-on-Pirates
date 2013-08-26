@@ -21,4 +21,4 @@ Enjoy! :)
 
 ACKNOWLEDGEMENT
 ===============
-I would also like to acknowledge *Coffee Games* for their support and partnership.
+I want to thank the team of *Coffee Games* for their support and partnership.
