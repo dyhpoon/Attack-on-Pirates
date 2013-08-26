@@ -15,7 +15,7 @@ Also, you can check out the game trailer in the following:
 
 [![ScreenShot](https://raw.github.com/dyhpoon/game-project/master/youtubeScreenshot.png)](https://www.youtube.com/watch?v=GC4CD5utn_E#action=share/)
 
-[Link to video](https://www.youtube.com/watch?v=GC4CD5utn_E#action=share/).
+[Link to video](https://www.youtube.com/watch?v=GC4CD5utn_E#action=share/)
 
 Enjoy! :)
 
