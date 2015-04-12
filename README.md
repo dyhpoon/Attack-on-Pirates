@@ -1,20 +1,45 @@
-ABOUT
-=====
+Attack on Pirates
+=================
 
-This is a mobile game called "Attack on Pirates" which I wrote from June 2013 to Aug 2013. Since the project is no longer maintained, I apologize for any bugs or crashes if you encounter.
+![](screenshot/game.gif)
 
-Even though the game is removed from app store, you can still get a glimpse of the gameplay by downloading the [sample.apk](https://github.com/dyhpoon/game-project/raw/master/sample.apk) to your Android devices.
+Note
+============
+The game is powered by [Corona SDK](https://coronalabs.com/products/corona-sdk/)
 
-Note that some codes, images and audio are not disclosed as they are copyrighted.
+About
+============
+This is a mobile game which I wrote in my spare time when I was still studying in university. Since this project is no longer maintained, I apologize for any bugs or crashes if you encounter.
 
-Also, you can check out the game trailer in the following: 
+Unfortunately, this game has already removed from the app store, but you can still get a glimpse of the gameplay by downloading this [apk](sample.apk) to your Android devices.
 
-[![ScreenShot](https://raw.github.com/dyhpoon/game-project/master/youtubeScreenshot.png)](https://www.youtube.com/watch?v=GC4CD5utn_E#action=share/)
+Thanks
+============
+I want to thank the team of *Coffee Games* for their support.
 
-[Link to video](https://www.youtube.com/watch?v=GC4CD5utn_E#action=share/)
+Screenshots
+============
+![](screenshot/welcome.png)
+![](screenshot/home.png)
+![](screenshot/luckydraw.png)
+![](screenshot/map.png)
+![](screenshot/game.png)
+![](screenshot/result.png)
+![](screenshot/shop.png)
 
-Enjoy! :)
+Copyright
+============
 
-ACKNOWLEDGEMENT
-===============
-I want to thank the team of *Coffee Games* for their support and partnership.
+    Copyright 2014 Darren Poon. All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
