@@ -1,11 +1,3 @@
---[[
-
-The end game result
-
---]]
-
-
-------------------------------FORWARD REF------------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -39,11 +31,7 @@ local keysTextX    = 215
 local keysTextY    = 218
 local scoreTextX   = 215
 local scoreTextY   = 254
----------------------------------------------------------------------------------
 
--------------------------------HELPER FUNCTIONS----------------------------------
-
--- draw UI
 local function showNextButton() 
     transition.to(nextButton, {time=1000, alpha=1})
     transition.to(highScoreText, {time=1000, alpha=1, xScale=2, yScale=2})
@@ -71,7 +59,7 @@ local function scoreAnimation(id)
     return function()
         if id == "monsters" then
             monstersNumText.text = table[id]
-            monstersNumText:setReferencePoint(display.CenterRightReferencePoint)
+            monstersNumText.anchorX, monstersNumText.anchorY = 1, .5
             monstersNumText.x = monsterTextX
             monstersNumText.y = monsterTextY
             if table[id] >= scoreTable[id] then
@@ -85,7 +73,7 @@ local function scoreAnimation(id)
 
         elseif id == "coins" then
             coinsNumText.text = table[id]
-            coinsNumText:setReferencePoint(display.CenterRightReferencePoint)
+            coinsNumText.anchorX, coinsNumText.anchorY = 1, .5
             coinsNumText.x = coinsTextX
             coinsNumText.y = coinsTextY
             if table[id] >= scoreTable[id] then
@@ -99,7 +87,7 @@ local function scoreAnimation(id)
 
         elseif id == "keys" then
             keysNumText.text = table[id]
-            keysNumText:setReferencePoint(display.CenterRightReferencePoint)
+            keysNumText.anchorX, keysNumText.anchorY = 1, .5
             keysNumText.x = keysTextX
             keysNumText.y = keysTextY
             if table[id] >= scoreTable[id] then
@@ -113,7 +101,7 @@ local function scoreAnimation(id)
 
         elseif id == "score" then
             scoreNumText.text = table[id]
-            scoreNumText:setReferencePoint(display.CenterRightReferencePoint)
+            scoreNumText.anchorX, scoreNumText.anchorY = 1, .5
             scoreNumText.x = scoreTextX
             scoreNumText.y = scoreTextY
             if table[id] >= scoreTable[id] then
@@ -142,34 +130,34 @@ local function drawLayout(scoreTable)
     local group = display.newGroup()
 
     local background = display.newImageRect("images/result/resultMenu.png", display.contentWidth, display.contentHeight)
-    background:setReferencePoint(display.CenterReferencePoint)
+    background.anchorX, background.anchorY = .5, .5
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     group:insert(background)
 
     local scoreBoard = display.newImage("images/result/resultScoreboard.png")
-    scoreBoard:setReferencePoint(display.CenterReferencePoint)
+    scoreBoard.anchorX, scoreBoard.anchorY = .5, .5
     scoreBoard.x = display.contentCenterX - 10
     scoreBoard.y = 190
     group:insert(scoreBoard)
 
     local highScoreBoard = display.newImageRect("images/result/resultHighscore.png", 224, 101)
-    highScoreBoard:setReferencePoint(display.CenterReferencePoint)
+    highScoreBoard.anchorX, highScoreBoard.anchorY = .5, .5
     highScoreBoard.x = display.contentCenterX
     highScoreBoard.y = 355
     group:insert(highScoreBoard)
 
     experienceBar = experience.new(soundEffect)
-    experienceBar:setReferencePoint(display.TopLeftReferencePoint)
+    experienceBar.anchorX, experienceBar.anchorY = 0, 0
     group:insert(experienceBar)
 
     local energy = energyTable["screen"]
     group:insert(energy)
 
-    local gameCoins = gameCoins.new()
+    local gameCoins = gameCoins.new(275, 38)
     group:insert(gameCoins)
 
-    local gameDiamonds = gameDiamonds.new()
+    local gameDiamonds = gameDiamonds.new(275, 15)
     group:insert(gameDiamonds)
 
     if scoreTable["result"] == "victory" then
@@ -177,7 +165,7 @@ local function drawLayout(scoreTable)
     else
         endGameText = display.newImage("images/result/resultStagefail.png")
     end
-    endGameText:setReferencePoint(display.CenterReferencePoint)
+    endGameText.anchorX, endGameText.anchorY = .5, .5
     endGameText.x = display.contentCenterX
     endGameText.y = 80
     endGameText.alpha = 0
@@ -185,27 +173,33 @@ local function drawLayout(scoreTable)
     endGameText.yScale = 0.1
     group:insert(endGameText)
 
-    
-    coinsNumText = display.newText("0", 0, 0, "comic sans ms", 14)
-    coinsNumText:setReferencePoint(display.CenterRightReferencePoint)
+    local isAndroid = system.getInfo("platformName") == "Android"   
+    if isAndroid then
+        desiredFont = "comic sans ms"
+    else
+        desiredFont = "Impact"
+    end
+
+    coinsNumText = display.newText("0", 0, 0, desiredFont, 14)
+    coinsNumText.anchorX, coinsNumText.anchorY = 1, .5
     coinsNumText.x = coinsTextX
     coinsNumText.y = coinsTextY
     group:insert(coinsNumText)
 
-    monstersNumText = display.newText("0", 0, 0, "comic sans ms", 14)
-    monstersNumText:setReferencePoint(display.CenterRightReferencePoint)
+    monstersNumText = display.newText("0", 0, 0, desiredFont, 14)
+    monstersNumText.anchorX, monstersNumText.anchorY = 1, .5
     monstersNumText.x = monsterTextX
     monstersNumText.y = monsterTextY
     group:insert(monstersNumText)
 
-    scoreNumText = display.newText("0", 0, 0, "comic sans ms", 14)
-    scoreNumText:setReferencePoint(display.CenterRightReferencePoint)
+    scoreNumText = display.newText("0", 0, 0, desiredFont, 14)
+    scoreNumText.anchorX, scoreNumText.anchorY = 1, .5
     scoreNumText.x = scoreTextX
     scoreNumText.y = scoreTextY
     group:insert(scoreNumText)
 
-    keysNumText = display.newText("0", 0, 0, "comic sans ms", 14)
-    keysNumText:setReferencePoint(display.CenterRightReferencePoint)
+    keysNumText = display.newText("0", 0, 0, desiredFont, 14)
+    keysNumText.anchorX, keysNumText.anchorY = 1, .5
     keysNumText.x = keysTextX
     keysNumText.y = keysTextY
     group:insert(keysNumText)
@@ -213,7 +207,11 @@ local function drawLayout(scoreTable)
     local function nextButtonListener(event)
         if event.phase == "ended" then
             soundEffect:play("button")
-            storyboard.gotoScene("home-scene", "fade", 800)
+            if scoreTable["mode"] == "story" then
+                storyboard.gotoScene("story-scene", "fade", 800)
+            else
+                storyboard.gotoScene("home-scene", "fade", 800)
+            end
         end
     end
     nextButton = widget.newButton{
@@ -278,10 +276,8 @@ local function updateHighScore()
         end
     end
 end
----------------------------------------------------------------------------------
 
 
----------------------------------------------------------------------------------
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
     local group = self.view
@@ -306,7 +302,7 @@ function scene:createScene( event )
     local layout = drawLayout(scoreTable)
     group:insert(layout)
 
-    highScoreText = display.newText("", 210, 343, "Impact", 20)
+    highScoreText = display.newText("", 210, 355, "Impact", 20)
     group:insert(highScoreText)
     if scoreTable["mode"] == "story" then
         highScoreText.text = localStorage.get("highScore")[scoreTable["storyLevel"]]
@@ -319,7 +315,6 @@ end
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
-    print("result scene")
     local group = self.view
 end
 

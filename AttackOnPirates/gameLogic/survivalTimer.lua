@@ -6,14 +6,14 @@ function new()
 	local timerListener
 	local count = 0
 	local background = display.newRect(0, 0, 300, 14)
-	background:setReferencePoint(display.CenterReferencePoint)
-	background:setFillColor(125, 125, 125)
+	background.anchorX, background.anchorY = .5, .5
+	background:setFillColor(125/255, 125/255, 125/255)
 	background.x = display.contentCenterX
 	background.y = 147
 	group:insert(background)
 
 	local timerText = display.newText("0:00", 0, 0, native.systemFont , 13)
-	timerText:setReferencePoint(display.BottomCenterReferencePoint)
+	timerText.anchorX, timerText.anchorY = .5, 1
 	timerText.x = display.contentCenterX
 	timerText.y = 155
 	group:insert(timerText)
@@ -26,7 +26,7 @@ function new()
 			secs = "0" .. secs
 		end
 		timerText.text = mins .. ":" .. secs
-		timerText:setReferencePoint(display.BottomCenterReferencePoint)
+		timerText.anchorX, timerText.anchorY = .5, 1
 		timerText.x = display.contentCenterX
 		timerText.y = 155
 	end

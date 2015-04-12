@@ -8,7 +8,7 @@ function new()
 
 	score = 0
 	scoreText = display.newText( "SCORE: 0" , 0, 0, "impact", 13 )
-	scoreText:setReferencePoint(display.CenterRightReferencePoint)
+	scoreText.anchorX, scoreText.anchorY = 1, .5
 	scoreText.x = display.contentWidth - 8
 	scoreText.y = 40
 
@@ -19,7 +19,7 @@ function new()
 	function group:addScore(scoreToBeAdded)
 		score = score + scoreToBeAdded
 		scoreText.text =  "SCORE:   " .. score --string.format( "SCORE: %6.0f", score )
-		scoreText:setReferencePoint(display.CenterRightReferencePoint)
+		scoreText.anchorX, scoreText.anchorY = 1, .5
 		scoreText.x = display.contentWidth - 8
 		scoreText.y = 40
 	end

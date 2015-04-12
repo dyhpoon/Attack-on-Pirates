@@ -9,7 +9,7 @@ function new(health, mana, soundEffect)
 	local menuIsOpened = false
 
 	local potionsBox = display.newImageRect("images/mainStackbar.png", 60, 30)
-	potionsBox:setReferencePoint(display.TopLeftReferencePoint)
+	potionsBox.anchorX, potionsBox.anchorY = 0, 0
 	potionsBox.x = display.contentWidth - 70
 	potionsBox.y = 1
 	group:insert(potionsBox)
@@ -41,7 +41,7 @@ function new(health, mana, soundEffect)
 	local function drawPotionsTable()
 		for i = 1, #potionsTable, 1 do
 			local potionImage = display.newImageRect(potionsTable[i][1], imageSize, imageSize)
-			potionImage:setReferencePoint(display.TopLeftReferencePoint)
+			potionImage.anchorX, potionImage.anchorY = 0, 0
 			potionImage.x = potionsTable[i][2]
 			potionImage.y = potionsTable[i][3]
 			imageGroup:insert(potionImage)
@@ -87,7 +87,7 @@ function new(health, mana, soundEffect)
 				selectItemImage = nil
 			end
 			selectItemImage = display.newImageRect("images/mainSelectitem.png", 60, 60)
-			selectItemImage:setReferencePoint(display.TopLeftReferencePoint)
+			selectItemImage.anchorX, selectItemImage.anchorY = 0, 0
 			selectItemImage.isVisible = false
 		end
 		textGroup.isVisible = true

@@ -11,7 +11,7 @@ function new()
 
     -- Draw Energy(graphic)
     local energyRects = display.newGroup()
-    energyRects:setReferencePoint(display.BottomLeftReferencePoint)
+    energyRects.anchorX, energyRects.anchorY = 0, 1
 	local numOfYellowRect = currentEnergy
 	local numOfGreyRect = maxEnergy - currentEnergy
 	local xPosition = 58
@@ -21,18 +21,18 @@ function new()
 	-- draw rects
 	for i = 1, numOfYellowRect, 1 do
 		local bar =  display.newRect(0, 0, 15, 8)
-		bar:setReferencePoint(display.BottomLeftReferencePoint)
+		bar.anchorX, bar.anchorY = 0, 1
 		bar.x = xPosition + ((i - 1) * marginLength)
 		bar.y = yPosition
-		bar:setFillColor(255, 255, 0)
+		bar:setFillColor(255/255, 255/255, 0/255)
 		energyRects:insert(bar)
 	end
 	for i = 1, numOfGreyRect, 1 do
 		local bar = display.newRect(0, 0, 15, 8)
-		bar:setReferencePoint(display.BottomLeftReferencePoint)
+		bar.anchorX, bar.anchorY = 0, 1
 		bar.x = xPosition + ((i - 1 + numOfYellowRect) * marginLength)
 		bar.y = yPosition
-		bar:setFillColor(125, 125, 125)
+		bar:setFillColor(125/255, 125/255, 125/255)
 		energyRects:insert(bar)
 	end
 
@@ -58,7 +58,7 @@ function new()
 	end
 	initTime()
 
-	local clock = display.newText("", 179, 13, "Helvetica", 10)
+	local clock = display.newText("", 179, 19, "Helvetica", 10)
 	-- draw clocks
 	if currentEnergy == maxEnergy then
 		clock.text = "Full"
@@ -81,10 +81,10 @@ function new()
 		end
 
 		for i = 1, currentEnergy, 1 do
-			energyRects[i]:setFillColor(255, 255, 0)
+			energyRects[i]:setFillColor(255/255, 255/255, 0/255)
 		end
 		for i = currentEnergy + 1, maxEnergy, 1 do
-			energyRects[i]:setFillColor(125, 125, 125)
+			energyRects[i]:setFillColor(125/255, 125/255, 125/255)
 		end
 
 		if currentEnergy ~= maxEnergy and countDown < 0 then

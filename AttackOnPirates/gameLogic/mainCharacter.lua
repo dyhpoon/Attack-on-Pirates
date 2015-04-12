@@ -38,8 +38,8 @@ function new(damage, monsters, minimap, health, soundEffect)
 
 	local collisionRect = display.newRect(mainChar.x + 22, mainChar.y - 5, 1, 25)
 	collisionRect.strokeWidth = 1
-	collisionRect:setFillColor(140, 140, 140)
-	collisionRect:setStrokeColor(180, 180, 180)
+	collisionRect:setFillColor(140/255, 140/255, 140/255)
+	collisionRect:setStrokeColor(180/255, 180/255, 180/255)
 	collisionRect.alpha = 0
 
 	local function ultDoDamage()

@@ -4,13 +4,14 @@ function new(x,y)
 	local group = display.newGroup()
 
 	local redBar = display.newRect(x, y, 35, 4)
+	redBar.anchorX, redBar.anchorY = 0, 0
 	group:insert(redBar)
-	redBar:setFillColor(255, 0, 0)
+	redBar:setFillColor(255/255, 0/255, 0/255)
  
 	local greenBar = display.newRect(x, y, 35, 4)
-	greenBar:setReferencePoint(display.TopLeftReferencePoint)
+	greenBar.anchorX, greenBar.anchorY = 0, 0
 	group:insert(greenBar)
-	greenBar:setFillColor(0, 255, 0)
+	greenBar:setFillColor(0/255, 255/255, 0/255)
  
 	function group:setHealth(current, max)
 		local percent = current / max

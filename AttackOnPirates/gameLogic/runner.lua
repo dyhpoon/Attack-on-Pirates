@@ -1,7 +1,6 @@
 module(..., package.seeall)
 
 local levelSetting = require 'gameLogic.levelSetting'
-local sprite = require("sprite")
 
 function new(resultTable, mode, soundEffect)
 	local timers = {}
@@ -78,12 +77,12 @@ function new(resultTable, mode, soundEffect)
 	local ultimate = ultimate.new(manaBar, monsters, pirate, minimap)
 
 	local topStatusBar = display.newImageRect("images/mainTopbar.png", display.contentWidth, 30)
-	topStatusBar:setReferencePoint(display.TopLeftReferencePoint)
+	topStatusBar.anchorX, topStatusBar.anchorY = 0, 0
 	topStatusBar.x = 0
 	topStatusBar.y = 0
 
-	local botBlackScreen = display.newRect( 0, 109, _W * 2, 47)
-	botBlackScreen:setFillColor( 0, 0, 0 ) -- black, to hide the bottom part
+	local botBlackScreen = display.newRect( 0, 130, _W * 2, 47)
+	botBlackScreen:setFillColor( 0/255, 0/255, 0/255 ) -- black, to hide the bottom part
 	-----------------------------------------------------------
 
 	----------------------SURVIVAL MODE------------------------

@@ -51,7 +51,6 @@ function new(mainCharStatus, soundEffect)
 			if chest.type == "coins" then
 				mainCharStatus["coins"]:increaseCoinsByN(10)
 			elseif chest.type == "sword" then
-				print(mainCharStatus["damage"]:getDamage() + 10)
 				mainCharStatus["damage"]:setDamage(mainCharStatus["damage"]:getDamage() + 10)
 			elseif chest.type == "curse" then
 				mainCharStatus["health"]:minusHpBy(math.floor(mainCharStatus["health"]:getMaxHealth() * 0.15))

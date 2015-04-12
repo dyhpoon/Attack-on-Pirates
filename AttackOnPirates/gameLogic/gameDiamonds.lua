@@ -2,10 +2,10 @@ module(..., package.seeall)
 
 local localStorage = require 'gameLogic.localStorage'
 
-function new()
+function new(x, y)
 	local group = display.newGroup()
 
-	local diamondsText = display.newText("", 275, 9, native.systemFont, 9)
+	local diamondsText = display.newText("", x, y, native.systemFont, 9)
 	diamondsText.text = localStorage.get("diamonds")
 	group:insert(diamondsText)
 

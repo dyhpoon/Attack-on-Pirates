@@ -25,13 +25,12 @@ function new(pText, pTime)
     toast.background.x = toast.text.x
     toast.background.y = toast.text.y
     toast.background.strokeWidth    = 4
-    toast.background:setFillColor(0, 0, 0)
-    toast.background:setStrokeColor(96, 88, 96)
+    toast.background:setFillColor(0/255, 0/255, 0/255)
+    toast.background:setStrokeColor(96/255, 88/255, 96/255)
 
     toast.text:toFront();
 
-    toast:setReferencePoint(display.CenterReferencePoint)
-    --toast:setReferencePoint(toast.width*.5, toast.height*.5)
+    toast.anchorX, toast.anchorY = .5, .5
 
     toast.alpha = 0;
     toast.transition = transition.to(toast, {time=250, alpha = 1});

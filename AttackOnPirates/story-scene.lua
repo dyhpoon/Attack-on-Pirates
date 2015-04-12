@@ -1,10 +1,3 @@
---[[
-
-The big map (story mode) of the game
-
---]]
-
------------------------------FASTFORWARD REF-----------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -53,10 +46,7 @@ local buttonsTable = {
     {41, 260, -3750},{42, 160, -3810},{43, 60, -3870},{44, 50, -4000},{45, 220, -4050},
     {46, 30, -4140},{47, 60, -4260},{48, 190, -4340},{49, 250, -4480},{50, 170, -4580},
 }
----------------------------------------------------------------------------------
 
-
------------------------------HELPER FUNCTIONS-----------------------------------
 local function cancelAllTransitions()
     if backgroundTransition then
         transition.cancel(backgroundTransition)
@@ -91,7 +81,7 @@ local function renderMap(id)
 
     if not mapIsAlreadyRendered then
         local temp = display.newImageRect(mapTable[id][1], display.contentWidth, 568)
-        temp:setReferencePoint(display.BottomCenterReferencePoint)
+        temp.anchorX, temp.anchorY = .5, 1
         temp.x = display.contentCenterX
         temp.y = mapTable[id][2]
         temp.mapID = id
@@ -126,38 +116,38 @@ local function drawMapBounds()
     local group = display.newGroup()
 
     lowerBound = display.newRect(0, 0, display.contentWidth, 5)
-    lowerBound:setReferencePoint(display.TopCenterReferencePoint)
+    lowerBound.anchorX, lowerBound.anchorY = .5, 0
     lowerBound.x = display.contentCenterX
     lowerBound.y = lowerBoundY
-    lowerBound:setFillColor(255, 255, 255)
+    lowerBound:setFillColor(255/255, 255/255, 255/255)
     lowerBound.alpha = 0
 
     local b = display.newRect(0, 0, display.contentWidth, 1)
-    b:setReferencePoint(display.CenterReferencePoint)
+    b.anchorX, b.anchorY = .5, .5
     b.x = display.contentCenterX
     b.y = lowerBoundY
     bounds:insert(b)
 
     for i=1, #mapTable, 1 do
         local temp = display.newImageRect(mapTable[i][1], display.contentWidth, 568)
-        temp:setReferencePoint(display.BottomCenterReferencePoint)
+        temp.anchorX, temp.anchorY = .5, 1
         temp.x = display.contentCenterX
         temp.y = mapTable[i][2]
         temp.mapID = i
         group:insert(temp)
 
         local b = display.newRect(0, 0, display.contentWidth, 1)
-        b:setReferencePoint(display.CenterReferencePoint)
+        b.anchorX, b.anchorY = .5, .5
         b.x = display.contentCenterX
         b.y = mapTable[i][2] - 568
         bounds:insert(b)
     end
 
     upperBound = display.newRect(0, 0, display.contentWidth, 5)
-    upperBound:setReferencePoint(display.BottomCenterReferencePoint)
+    upperBound.anchorX, upperBound.anchorY = .5, 1
     upperBound.x = display.contentCenterX
     upperBound.y = upperBoundY
-    upperBound:setFillColor(255, 255, 255)
+    upperBound:setFillColor(255/255, 255/255, 255/255)
     upperBound.alpha = 0
     bounds.alpha = 0
 
@@ -172,7 +162,7 @@ local function drawRoute()
     for i=1, #buttonsTable, 1 do
         route:append(buttonsTable[i][2]-offsetx,buttonsTable[i][3]+offsety)
     end
-    route:setColor(255, 255, 255)
+    route:setColor(255/255, 255/255, 255/255)
 
     route.width = 5
 
@@ -249,7 +239,6 @@ local function swipe(event)
         endY = event.y
         if pcall(swipeScreen) then
         else
-            print("arithmetic error in swipe")
         end
         beginY = endY
     elseif (event.phase == "ended" or event.phase == "cancelled") and startTime ~= nil then
@@ -263,7 +252,6 @@ local function swipe(event)
         else
             if pcall(swipeScreen) then
             else
-                print("arithmetic error in swipe")
             end
         end 
     end
@@ -290,7 +278,7 @@ local function showPopUp(level)
         return true
     end
     local popUp = display.newImageRect("images/map/popup.png", display.contentWidth, display.contentHeight)
-    popUp:setReferencePoint(display.CenterReferencePoint)
+    popUp.anchorX, popUp.anchorY = .5, .5
     popUp.x = display.contentCenterX
     popUp.y = display.contentCenterY
     mapPopup:insert(popUp)
@@ -304,10 +292,10 @@ local function showPopUp(level)
     closeButton:addEventListener("touch", closePopupListener)
     mapPopup:insert(closeButton)
     
-    mapPopup:insert(display.newText(level, 180, 78, "Impact", 30))
+    mapPopup:insert(display.newText(level, 180, 95, "Impact", 30))
 
     local highScore = localStorage.get("highScore")[level]
-    local highScoreText = display.newText("", 253, 160, "impact", 26)
+    local highScoreText = display.newText("", 253, 175, "impact", 26)
     if highScore then
         highScoreText.text = highScore
     else
@@ -416,10 +404,9 @@ local function createButton(x,y,id,buttonType)
     end
     return myButton
 end
----------------------------------------------------------------------------------
 
 
----------------------------------------------------------------------------------
+
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
     local group = self.view
@@ -479,10 +466,8 @@ function scene:createScene( event )
 
 
     local function tutorialButtonListener(event)
-        if event.phase == "began" and not buttonIsPressed then
+        if event.phase == "began" then
             soundEffect:play("button")
-            buttonIsPressed = true
-            unfreezeButtonTimer = timer.performWithDelay(buttonPressTimeDelay, unfreezeButton)
             storyboard.gotoScene("tutorial-scene", "slideLeft", 800)
         end
     end
@@ -490,7 +475,7 @@ function scene:createScene( event )
         defaultFile = "images/buttons/buttonTutorial.png",
         onEvent = tutorialButtonListener
     }
-    tutorialButton:setReferencePoint(display.BottomCenterReferencePoint)
+    tutorialButton.anchorX, tutorialButton.anchorY = .5, 1
     tutorialButton.y = 480
     group:insert(tutorialButton)
 end

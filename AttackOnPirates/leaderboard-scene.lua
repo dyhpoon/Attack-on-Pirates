@@ -1,9 +1,3 @@
---[[
-
-The leaderboard of the game
-
---]]
-
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -75,7 +69,6 @@ local function swipe(event)
         if pcall(flipPages) then
             -- do nothing
         else
-            print("arithmetic error in swipe")
         end
     end
 end
@@ -155,7 +148,7 @@ local function displayFriendsScore(i, name, score, fbid)
 
     -- rank text
     local rankNumberText = display.newText(rank, 450, 28*i+47, font, 14)
-    rankNumberText:setReferencePoint(display.TopLeftReferencePoint)
+    rankNumberText.anchorX, rankNumberText.anchorY = 0, 0
     rankNumberText.xPosition = 30
     rankNumberText.yPosition = 28*i+47
     group:insert(rankNumberText)
@@ -163,14 +156,14 @@ local function displayFriendsScore(i, name, score, fbid)
     -- user's friends' name text
     local playerName = trimName(name)
     local nameText = display.newText(playerName, 450, 28*i+47, font, 14)
-    nameText:setReferencePoint(display.TopLeftReferencePoint)
+    nameText.anchorX, nameText.anchorY = 0, 0
     nameText.xPosition = 84
     nameText.yPosition = 28*i+47
     group:insert(nameText)
 
     -- score text
     local scoreText = display.newText(score, 450, 28*i+47, font, 14)
-    scoreText:setReferencePoint(display.TopLeftReferencePoint)
+    scoreText.anchorX, scoreText.anchorY = 0, 0
     scoreText.xPosition = 265
     scoreText.yPosition = 28*i+47
     group:insert(scoreText)
@@ -218,7 +211,7 @@ local function displayUserScore(name, score, rank)
     local nameText = display.newText(username, 84, 385, font, 18)
     group:insert(nameText)
     local scoreText = display.newText(score, 263, 385, font, 18)
-    scoreText:setReferencePoint(display.CenterReferencePoint)
+    scoreText.anchorX, scoreText.anchorY = .5, .5
     group:insert(scoreText)
     
     return group
@@ -232,24 +225,57 @@ function scene:createScene( event )
 
     soundEffect = otherSoundEffect.new()
 
-    print("friendsScoreScene createScene")
     local background = display.newImageRect("images/leaderboardMenu.png", display.contentWidth, display.contentHeight)
-    background:setReferencePoint(display.CenterReferencePoint)
+    background.anchorX, background.anchorY = .5, .5
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     group:insert(background)
 
     userFacebookID = event.params.myScoreInformation[1][2]
+    --userFacebookID = "100006269852943"
     currentPage = 1
     currentRank = 1
+    --lastScore = 0
     
     local data = event.params.friendsInformation
     lastScore = data[1][3]
+
+    --[[
+    local data = {
+        {"Sharon Amfbfihebidc Liangberg", "100006269852943", 38}, --1
+        {"James Amfbffhecjaa Warmanstein", "100006266853011", 30},
+        {"Maria Amfbgehebgbb Wongberg", "100006275852722", 28},
+        {"Donna Amfbfdegcjha Chengwitzsenescumansteinbergsonsky", "100006264573081", 20},
+        {"Mary Amfbgceabffe Moiduwitz", "100006273512665", 19},
+        {"Mike Amfbegaabedb Rosenthalstein", "100006257112542", 13},
+        {"Richard Amfbfbbaaicf Warmanman", "100006262211936", 8},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0},
+        {"Richard Amfbfbbaaicf Warmanman", "100006262211936", 8},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0}, -- 10
+        {"Richard Amfbfbbaaicf Warmanman", "100006262211936", 8}, -- 11
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0},
+        {"Sharon Amfbfihebidc Liangberg", "100006269852943", 38},
+        {"James Amfbffhecjaa Warmanstein", "100006266853011", 30},
+        {"Maria Amfbgehebgbb Wongberg", "100006275852722", 28},
+        {"Donna Amfbfdegcjha Chengwitzsenescumansteinbergsonsky", "100006264573081", 20},
+        {"Mary Amfbgceabffe Moiduwitz", "100006273512665", 19},
+        {"Mike Amfbegaabedb Rosenthalstein", "100006257112542", 13},
+        {"Richard Amfbfbbaaicf Warmanman", "100006262211936", 8},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0}, -- 20
+        {"Richard Amfbfbbaaicf Warmanman", "100006262211936", 8},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0},
+        {"Dorothy Amfbfajdbjdd Letuchyson", "100006261042044", 0},
+    }
+    --]]
 
     numberOfPages = math.floor(#data/10)
     if #data%10 ~= 0 then
         numberOfPages = numberOfPages + 1
     end
+
+    --local header = displayHeader()
+    --group:insert(header)
 
     rankTable = display.newGroup()
     for i = 0, numberOfPages, 1 do
@@ -269,7 +295,8 @@ function scene:createScene( event )
 
     local footer = displayFooter()
     group:insert(footer)
-
+    --local userScore = displayUserScore(data[1][1], data[1][3], userRank)
+    --group:insert(userScore)
     local userScore = displayUserScore(myName, myScore, userRank)
     group:insert(userScore)
 
@@ -293,14 +320,12 @@ end
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
-    print("friendsScoreScene willEnterScene")
     local group = self.view
 end
 
 
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
-    print("friendsScoreScene enterScene")
     local group = self.view
     Runtime:addEventListener("touch", swipe)
 
@@ -311,7 +336,6 @@ end
 
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
-    print("friendsScoreScene exitScene")
     local group = self.view
     Runtime:removeEventListener("touch", swipe)
 end
@@ -319,7 +343,6 @@ end
 
 -- Called AFTER scene has finished moving offscreen:
 function scene:didExitScene( event )
-    print("friendsScoreScene didExitScene")
     local group = self.view
 
     soundEffect:dispose()
@@ -330,7 +353,6 @@ end
 
 -- Called prior to the removal of scene's "view" (display group)
 function scene:destroyScene( event )
-    print("friendsScoreScene destroyScene")
     local group = self.view
 
     currentPage = nil

@@ -4,26 +4,26 @@ local monsterHealthBar = require 'gameLogic.monsterHealthBar'
 
 monstersInfo = {
 	-- {imagesPath, sheetWidth, sheetHeight, #frames, width, height, runStart, runCount, atkStart, atkCount, yOffset, xOffset, HPyOffset, r, g, b}
-	{"images/enemies/enemyChest.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},		--1
-	{"images/enemies/enemyEnergyball.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},		--2
-	{"images/enemies/enemyFrog.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},				--3
-	{"images/enemies/enemyFrog2.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--4
-	{"images/enemies/enemyFrog3.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--5
-	{"images/enemies/enemyFrog4.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--6
-	{"images/enemies/enemyFrog5.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--7
-	{"images/enemies/enemyFrog6.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--8
-	{"images/enemies/enemyFrog7.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--9
-	{"images/enemies/enemyFrog8.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--10
-	{"images/enemies/enemyKingFrog.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 10, 0, 255, 255, 255,},		--11
-	{"images/enemies/enemyKingoctopus.png", 1024, 512, 12, 160, 160, 9, 4, 1, 8, 22, 0, 20, 255, 255, 255,},--12
-	{"images/enemies/enemyOctopus.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--13
-	{"images/enemies/enemyOctopus2.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--14
-	{"images/enemies/enemyOctopus3.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--15
-	{"images/enemies/enemyOctopus4.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--16
-	{"images/enemies/enemySkeleton.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--17
-	{"images/enemies/enemyWerewolf.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 15, 0, 255, 255, 255,},		--18
-	{"images/enemies/enemyWerewolf2.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 15, 0, 255, 255, 255,},	--19
-	{"images/enemies/enemyZombie.png", 512, 128, 6, 80, 80, 4, 3, 1, 3, 0, 0, 0, 255, 255, 255,},			--20
+	{"images/enemies/enemyChest.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},		--1
+	{"images/enemies/enemyEnergyball.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},		--2
+	{"images/enemies/enemyFrog.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},				--3
+	{"images/enemies/enemyFrog2.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--4
+	{"images/enemies/enemyFrog3.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--5
+	{"images/enemies/enemyFrog4.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--6
+	{"images/enemies/enemyFrog5.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--7
+	{"images/enemies/enemyFrog6.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--8
+	{"images/enemies/enemyFrog7.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--9
+	{"images/enemies/enemyFrog8.png", 		256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--10
+	{"images/enemies/enemyKingFrog.png", 	512, 512, 8, 160, 160, 5, 4, 1, 4, 40, 10, 50, 255, 255, 255,},		--11
+	{"images/enemies/enemyKingoctopus.png", 1024, 512, 12, 160, 160, 9, 4, 1, 8, 42, 0, 80, 255, 255, 255,},--12
+	{"images/enemies/enemyOctopus.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--13
+	{"images/enemies/enemyOctopus2.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--14
+	{"images/enemies/enemyOctopus3.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--15
+	{"images/enemies/enemyOctopus4.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--16
+	{"images/enemies/enemySkeleton.png", 	256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 255, 255, 255,},			--17
+	{"images/enemies/enemyWerewolf.png", 	512, 512, 8, 160, 160, 5, 4, 1, 4, 38, 15, 40, 255, 255, 255,},		--18
+	{"images/enemies/enemyWerewolf2.png", 	512, 512, 8, 160, 160, 5, 4, 1, 4, 38, 15, 50, 255, 255, 255,},	--19
+	{"images/enemies/enemyZombie.png", 		512, 128, 6, 80, 80, 4, 3, 1, 3, 0, 0, 0, 255, 255, 255,},			--20
 
 	{"images/enemies/enemyChest.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--21
 	{"images/enemies/enemyEnergyball.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},		--22
@@ -35,15 +35,15 @@ monstersInfo = {
 	{"images/enemies/enemyFrog6.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--28
 	{"images/enemies/enemyFrog7.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--29
 	{"images/enemies/enemyFrog8.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--30
-	{"images/enemies/enemyKingFrog.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 10, 0, 80, 80, 80,},		--31
-	{"images/enemies/enemyKingoctopus.png", 1024, 512, 12, 160, 160, 9, 4, 1, 8, 22, 0, 20, 80, 80, 80,},--32
+	{"images/enemies/enemyKingFrog.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 40, 10, 50, 80, 80, 80,},		--31
+	{"images/enemies/enemyKingoctopus.png", 1024, 512, 12, 160, 160, 9, 4, 1, 8, 42, 0, 80, 80, 80, 80,},--32
 	{"images/enemies/enemyOctopus.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--33
 	{"images/enemies/enemyOctopus2.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--34
 	{"images/enemies/enemyOctopus3.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--35
 	{"images/enemies/enemyOctopus4.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--36
 	{"images/enemies/enemySkeleton.png", 256, 256, 8, 80, 80, 5, 4, 1, 4, 0, 0, 0, 80, 80, 80,},			--37
-	{"images/enemies/enemyWerewolf.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 15, 0, 80, 80, 80,},		--38
-	{"images/enemies/enemyWerewolf2.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 18, 15, 0, 80, 80, 80,},	--39
+	{"images/enemies/enemyWerewolf.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 38, 15, 40, 80, 80, 80,},		--38
+	{"images/enemies/enemyWerewolf2.png", 512, 512, 8, 160, 160, 5, 4, 1, 4, 38, 15, 50, 80, 80, 80,},	--39
 	{"images/enemies/enemyZombie.png", 512, 128, 6, 80, 80, 4, 3, 1, 3, 0, 0, 0, 80, 80, 80,},			--40
 }
 
@@ -62,7 +62,6 @@ function new(pirateHealth, soundEffect)
 	-- create a monster
 	local function monsterSpriteListener(event)
 		local targetMonster = event.target
-		--print(event.phase .. " " .. targetMonster.sequence .. " " .. targetMonster.frame)
 		if targetMonster.sequence == "attacking" and targetMonster.frame == 3 then
 			soundEffect:play("enemyattack")
 			local currentHealth = pirateHealth:getHealth()
@@ -99,7 +98,7 @@ function new(pirateHealth, soundEffect)
 		monster:setSequence("running")
 		monster:play()
 		monster.x = xPosn
-		monster.y = 83 - monstersInfo[id][11]
+		monster.y = 65 - monstersInfo[id][11]
 		monster.xScale = 0.5
 		monster.yScale = 0.5
 		monster.alpha = 1
@@ -111,15 +110,15 @@ function new(pirateHealth, soundEffect)
 		monster.atkFrame = monstersInfo[id][10]
 		monster.boss = isBoss
 		monster.xOffset = monstersInfo[id][12]
-		monster.health = monsterHealthBar.new(monster.x,monster.y)
-		monster.health:setReferencePoint(display.CenterReferencePoint)
+		monster.health = monsterHealthBar.new(monster.x - 390,monster.y - 50)
+		monster.anchorX =.5
 		monster.health.x = monster.x
-		monster.health:setReferencePoint(display.TopLeftReferencePoint)
+		monster.anchorY = 0
 		monster.health.y = monster.y - 25 + monstersInfo[id][13]
 		monster.isInBattle = false
 		monster.id = id
 		monster:addEventListener("sprite", monsterSpriteListener)
-		monster:setFillColor(monstersInfo[id][14], monstersInfo[id][15], monstersInfo[id][16])
+		monster:setFillColor(monstersInfo[id][14]/255, monstersInfo[id][15]/255, monstersInfo[id][16]/255)
 
 		group:insert(monster)
 		group:insert(monster.health)

@@ -5,7 +5,7 @@ function new()
 	group.keys = 0
 
 	local keyText = display.newText( "0" , 0, 0, "impact", 13 )
-	keyText:setReferencePoint(display.CenterRightReferencePoint)
+	keyText.anchorX, keyText.anchorY = 1, .5
 	keyText.x = 145
 	keyText.y = 15
 	keyText.text = group.keys
@@ -14,7 +14,7 @@ function new()
 	function group:setKeys(keys)
 		self.keys = keys
 		keyText.text = self.keys
-		keyText:setReferencePoint(display.CenterRightReferencePoint)
+		keyText.anchorX, keyText.anchorY = 1, .5
 		keyText.x = 145
 		keyText.y = 15
 	end
@@ -22,7 +22,7 @@ function new()
 	function group:increaseKeysByN(n)
 		self.keys = self.keys + n
 		keyText.text = self.keys
-		keyText:setReferencePoint(display.CenterRightReferencePoint)
+		keyText.anchorX, keyText.anchorY = 1, .5
 		keyText.x = 145
 		keyText.y = 15
 	end

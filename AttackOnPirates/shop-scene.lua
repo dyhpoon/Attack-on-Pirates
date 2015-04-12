@@ -1,10 +1,3 @@
---[[
-
-Shop
-
---]]
-
--------------------------------FORWARD REF-------------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -32,23 +25,22 @@ local soundEffect
 local itemsTable = {
     --table
     --{id, award, cost(coins), image, cost(diamonds)}
-    {"butRestoreEnergy", "images/shop/shopEnergytxt.png", 300, "images/shop/shopEnergy.png", 5},
-    {"buyNormalPot", "images/shop/shopPotiontxt.png", 10, "images/shop/shopPotion.png", 1},
-    {"buySuperPot", "images/shop/shopSuperpotiontxt.png", 30, "images/shop/shopSuperpotion.png", 2},
-    {"buyElitePot", "images/shop/shopElitepotiontxt.png", 50, "images/shop/shopElitepotion.png", 3},
-    {"buyUltimatePot", "images/shop/shopUltimatepotiontxt.png", 70, "images/shop/shopUltimatepotion.png", 4},
+    {"butRestoreEnergy", "images/shop/shopEnergytxt.png", 300, "images/shop/shopEnergy.png", 3},
+    {"buyNormalPot", "images/shop/shopPotiontxt.png", 10, "images/shop/shopPotion.png", "N/A"},
+    {"buySuperPot", "images/shop/shopSuperpotiontxt.png", 30, "images/shop/shopSuperpotion.png", "N/A"},
+    {"buyElitePot", "images/shop/shopElitepotiontxt.png", 50, "images/shop/shopElitepotion.png", 1},
+    {"buyUltimatePot", "images/shop/shopUltimatepotiontxt.png", 70, "images/shop/shopUltimatepotion.png", 2},
     {"buyBluePot", "images/shop/shopManatxt.png", 10, "images/shop/shopMana.png", 1},
 
     --dictionary
-    ["butRestoreEnergy"]  = {"butRestoreEnergy", "images/shop/shopEnergytxt.png", 500, "images/shop/shopEnergy.png", 5},
-    ["buyNormalPot"]      = {"buyNormalPot", "images/shop/shopPotiontxt.png", 10, "images/shop/shopPotion.png", 1},
-    ["buySuperPot"]       = {"buySuperPot", "images/shop/shopSuperpotiontxt.png", 30, "images/shop/shopSuperpotion.png", 2},
-    ["buyElitePot"]       = {"buyElitePot", "images/shop/shopElitepotiontxt.png", 50, "images/shop/shopElitepotion.png", 3},
-    ["buyUltimatePot"]    = {"buyUltimatePot", "images/shop/shopUltimatepotiontxt.png", 70, "images/shop/shopUltimatepotion.png", 4},
+    ["butRestoreEnergy"]  = {"butRestoreEnergy", "images/shop/shopEnergytxt.png", 500, "images/shop/shopEnergy.png", 3},
+    ["buyNormalPot"]      = {"buyNormalPot", "images/shop/shopPotiontxt.png", 10, "images/shop/shopPotion.png", "N/A"},
+    ["buySuperPot"]       = {"buySuperPot", "images/shop/shopSuperpotiontxt.png", 30, "images/shop/shopSuperpotion.png", "N/A"},
+    ["buyElitePot"]       = {"buyElitePot", "images/shop/shopElitepotiontxt.png", 50, "images/shop/shopElitepotion.png", 1},
+    ["buyUltimatePot"]    = {"buyUltimatePot", "images/shop/shopUltimatepotiontxt.png", 70, "images/shop/shopUltimatepotion.png", 2},
     ["buyBluePot"]        = {"buyBluePot", "images/shop/shopManatxt.png", 10, "images/shop/shopMana.png", 1},
 
 }
----------------------------------------------------------------------------------
 
 ------------------BUTTONS LISTENER ------------------------
 local function selectButtonListener(event)
@@ -59,7 +51,7 @@ local function selectButtonListener(event)
             descriptionImage = nil
         end
         descriptionImage = display.newImage(event.target.description)
-        descriptionImage:setReferencePoint(display.CenterReferencePoint)
+        descriptionImage.anchorX, descriptionImage.anchorY = .5, .5
         descriptionImage.x = display.contentCenterX
         descriptionImage.y = 360
         shopView:insert(descriptionImage)
@@ -69,7 +61,7 @@ local function selectButtonListener(event)
             selectionImage = nil
         end
         selectionImage = display.newImage("images/shop/shopSelectitem.png")
-        selectionImage:setReferencePoint(display.CenterReferencePoint)
+        selectionImage.anchorX, selectionImage.anchorY = .5, .5
         selectionImage.x = event.target.x
         selectionImage.y = event.target.y
         shopView:insert(selectionImage)
@@ -96,6 +88,10 @@ local function buyButtonListener(event)
                 numOfTokensHave = coins:getCoins()
             elseif currentCurrency == "diamond" then
                 numOfTokensNeeded = itemsTable[selectedItem][5]
+                if numOfTokensNeeded == "N/A" then
+                    toast.new("Not available.", 3000)
+                    return
+                end
                 numOfTokensHave = diamonds:getDiamonds()
             end
 
@@ -187,7 +183,7 @@ local function drawButtons()
         button.description = itemsTable[i][2]
         button.cost = itemsTable[i][3]
         button.diamondCost = itemsTable[i][5]
-        button:setReferencePoint(display.CenterReferencePoint)
+        button.anchorX, button.anchorY = .5, .5
         button.x = (j-1) * marginX + rowPositionX
         button.y = rowPositionY
         group:insert(button)
@@ -199,15 +195,15 @@ local function drawButtons()
     end
 
     local coinBuyButton = display.newImage("images/shop/shopCoinbuy.png")
-    coinBuyButton.x = 100
-    coinBuyButton.y = 280
+    coinBuyButton.x = 103
+    coinBuyButton.y = 282
     coinBuyButton.currency = "coin"
     group:insert(coinBuyButton)
     coinBuyButton:addEventListener("touch", buyButtonListener)
 
     local diamondBuyButton = display.newImage("images/shop/shopDiamondbuy.png")
-    diamondBuyButton.x = 227
-    diamondBuyButton.y = 280
+    diamondBuyButton.x = 230
+    diamondBuyButton.y = 282
     diamondBuyButton.currency = "diamond"
     group:insert(diamondBuyButton)
     diamondBuyButton:addEventListener("touch", buyButtonListener)
@@ -229,7 +225,7 @@ local function drawButtons()
         overFile = "images/buttons/buttonBackonclick.png",
         onEvent = backButtonListener,
     }
-    backButton:setReferencePoint(display.CenterReferencePoint)
+    backButton.anchorX, backButton.anchorY = .5, .5
     backButton.x = 85
     backButton.y = 450
     group:insert(backButton)
@@ -250,7 +246,7 @@ local function drawDescriptionFrame()
     local group = display.newGroup()
 
     local descriptionFrame = display.newImage("images/shop/shopDescriptionframe.png")
-    descriptionFrame:setReferencePoint(display.CenterReferencePoint)
+    descriptionFrame.anchorX, descriptionFrame.anchorY = .5, .5
     descriptionFrame.x = display.contentCenterX
     descriptionFrame.y = 360
     group:insert(descriptionFrame)
@@ -267,12 +263,10 @@ local function drawLayout()
     local experienceBar = experience.new()
     group:insert(experienceBar)
 
-    coins = gameCoins.new()
-    coins.y = coins.y - 4
+    coins = gameCoins.new(275, 34)
     group:insert(coins)
 
-    diamonds = gameDiamonds.new()
-    diamonds.y = diamonds.y - 4
+    diamonds = gameDiamonds.new(275, 11)
     group:insert(diamonds)
 
     local function IAPButtonListener( event )
@@ -283,7 +277,7 @@ local function drawLayout()
         end 
     end
     local iapButton = display.newImage("images/buttons/buttonIapmainmenu.png")
-    iapButton:setReferencePoint(display.CenterReferencePoint)
+    iapButton.anchorX, iapButton.anchorY = .5, .5
     iapButton.x = 304
     iapButton.y = 12
     iapButton:addEventListener("touch", IAPButtonListener)
@@ -307,7 +301,7 @@ function scene:createScene( event )
     shopView = display.newGroup()
 
     local menuImage = display.newImageRect("images/shop/shopMenu.png", display.contentWidth, display.contentHeight)
-    menuImage:setReferencePoint(display.CenterReferencePoint)
+    menuImage.anchorX, menuImage.anchorY = .5, .5
     menuImage.x = display.contentCenterX
     menuImage.y = display.contentCenterY
     group:insert(menuImage)

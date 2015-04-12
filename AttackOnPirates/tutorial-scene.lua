@@ -1,14 +1,8 @@
---[[
-
-Gameplay tutorial
-
---]]
-
---------------------------FASTFORWARD REF-----------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
 local otherSoundEffect = require 'gameLogic.otherSoundEffect'
+local localStorage = require 'gameLogic.localStorage'
 local tutorialImages = {
     "images/tutorial/tutorial1.png",
     "images/tutorial/tutorial2.png",
@@ -18,9 +12,7 @@ local tutorialImages = {
 local soundEffect
 local currentPage
 local leftArrow, rightArrow
----------------------------------------------------------------------------------
 
----------------------------HELPER FUNCTIONS-----------------------------------
 local function drawTutorial()
     local group = display.newGroup()
 
@@ -28,7 +20,7 @@ local function drawTutorial()
     for i = 1, #tutorialImages, 1 do
 
         local page = display.newImageRect(tutorialImages[i], display.contentWidth, display.contentHeight)
-        page:setReferencePoint(display.CenterReferencePoint)
+        page.anchorX, page.anchorY = .5, .5
         if i == 1 then
             page.x = display.contentCenterX
         else
@@ -42,7 +34,12 @@ local function drawTutorial()
     local function exitButtonListener(event)
         if event.phase == "began" then
             soundEffect:play("button")
-            storyboard.gotoScene(storyboard.getPrevious(), "slideRight", 800)
+            if localStorage.get("storyLevel") == -1 then
+                localStorage.saveWithKey("storyLevel", 0)
+                storyboard.gotoScene("home-scene", "fade", 800)
+            else
+                storyboard.gotoScene(storyboard.getPrevious(), "slideRight", 800)
+            end
         end
     end
     local exitButton = display.newImage("images/buttons/buttonExit.png")
@@ -105,8 +102,6 @@ local function drawTutorial()
 
     return group
 end
----------------------------------------------------------------------------------
-
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )

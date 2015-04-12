@@ -137,7 +137,6 @@ function group:explosionAnimation(i,j,type)
 
 	elseif type == "area" then
 		-- do something
-		print("area")
 		local function destroy(target)
 			return function()
 			if target then

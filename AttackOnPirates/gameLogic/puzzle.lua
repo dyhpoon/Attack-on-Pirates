@@ -67,7 +67,7 @@ function new(mode, storyLevel, soundEffect)
 
 	--------------------BACKGROUND IMAGE-----------------------
 	local gameBoardImage = display.newImage("images/gameboard.png")
-	gameBoardImage:setReferencePoint(display.BottomCenterReferencePoint)
+	gameBoardImage.anchorX, gameBoardImage.anchorY = .5, 1
 	gameBoardImage.x = display.contentCenterX
 	gameBoardImage.y = display.contentHeight - 2
 	lowerGameBackLayer:insert(gameBoardImage)
@@ -288,7 +288,6 @@ function new(mode, storyLevel, soundEffect)
 		local gemsTableToBeDestroyed = {}
 
 		local function removeGemsTable()
-			--print("removeGemsTable")
 			for i = 1, 8, 1 do
 				for j = 1, 8, 1 do
 					gemToBeDestroyed = gemsTableToBeDestroyed[i][j]

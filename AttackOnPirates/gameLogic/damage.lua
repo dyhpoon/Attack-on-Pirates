@@ -12,7 +12,7 @@ function new(streak)
 	local updateTimer
 
 	local damageText = display.newText( "0" , 0, 0, "impact", 13 )
-	damageText:setReferencePoint(display.CenterRightReferencePoint)
+	damageText.anchorX, damageText.anchorY = 1, .5
 	damageText.x = 68
 	damageText.y = 15
 	damageText.text = group.damage
@@ -21,7 +21,7 @@ function new(streak)
 	function group:setDamage(dmg)
 		self.damage = dmg
 		damageText.text = self.damage + self.bonus
-		damageText:setReferencePoint(display.CenterRightReferencePoint)
+		damageText.anchorX, damageText.anchorY = 1, .5
 		damageText.x = 68
 		damageText.y = 15
 	end
@@ -29,7 +29,7 @@ function new(streak)
 	function group:increaseDamageByN(n)
 		self.damage = self.damage + n
 		damageText.text = self.damage + self.bonus
-		damageText:setReferencePoint(display.CenterRightReferencePoint)
+		damageText.anchorX, damageText.anchorY = 1, .5
 		damageText.x = 68
 		damageText.y = 15
 	end
@@ -41,7 +41,7 @@ function new(streak)
 	local function updateDamage()
 		group.bonus = streak:getStreak()
 		damageText.text = group.damage + group.bonus
-		damageText:setReferencePoint(display.CenterRightReferencePoint)
+		damageText.anchorX, damageText.anchorY = 1, .5
 		damageText.x = 68
 		damageText.y = 15
 	end

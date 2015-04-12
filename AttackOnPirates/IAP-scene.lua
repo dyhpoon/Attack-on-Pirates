@@ -1,10 +1,3 @@
---[[
-
-The IAP of the game
-
---]]
-
-------------------------------FORWARD REF-------------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -14,13 +7,18 @@ local otherSoundEffect = require 'gameLogic.otherSoundEffect'
 local localStorage = require 'gameLogic.localStorage'
 local soundEffect
 local processingMask
----------------------------------------------------------------------------------
 
-------------------------HELPER FUNCTIONS---------------------------
+local variables = {}
+variables["processing"] = false
+local products = 
+{
+    "aop.normalpack",
+    "aop.bigpack",
+    "aop.overloaded"
+}
 
--- to init iap store
 local function iapPurchase(productIndex)
-    print ("Trying to purchase " .. products[productIndex]);
+
     if (store.canMakePurchases) and variables["processing"] == false then
         store.purchase({products[productIndex]});
     end
@@ -33,15 +31,15 @@ local function onInitStore(event)
         transactionInfo = "Transaction Success!";
 
         if event.transaction.productIdentifier == products[1] then
-            print("diamonds + 1")
+
             local currentDiamonds = localStorage.get("diamonds")
             localStorage.saveWithKey("diamonds", currentDiamonds + 1)
         elseif event.transaction.productIdentifier == products[2] then
-            print("diamonds + 6")
+
             local currentDiamonds = localStorage.get("diamonds")
             localStorage.saveWithKey("diamonds", currentDiamonds + 6)
         elseif event.transaction.productIdentifier == products[3] then
-            print("diamonds + 20")
+
             local currentDiamonds = localStorage.get("diamonds")
             localStorage.saveWithKey("diamonds", currentDiamonds + 20)
         end
@@ -68,14 +66,12 @@ local function onInitStore(event)
     store.finishTransaction(event.transaction);
 end
 
----------------------------------------------------------------------------------
-
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
     local group = self.view
 
     processingMask = display.newImageRect("images/processing.png", display.contentWidth, display.contentHeight);
-    processingMask:setReferencePoint(display.CenterReferencePoint)
+    processingMask.anchorX, processingMask.anchorY = .5, .5
     processingMask.x = display.contentCenterX
     processingMask.y = display.contentCenterY
     processingMask.isVisible = false;
@@ -84,7 +80,7 @@ function scene:createScene( event )
     soundEffect = otherSoundEffect.new()
 
     local IAPImage = display.newImageRect("images/iapscreen.png", display.contentWidth, display.contentHeight)
-    IAPImage:setReferencePoint(display.CenterReferencePoint)
+    IAPImage.anchorX, IAPImage.anchorY = .5, .5
     IAPImage.x = display.contentCenterX
     IAPImage.y = display.contentCenterY
     group:insert(IAPImage)
@@ -142,6 +138,9 @@ function scene:createScene( event )
     buyButton2:addEventListener("touch", buy)
     buyButton3:addEventListener("touch", buy)
 end
+
+variables["processing"] = false;
+store.init(onInitStore);
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )

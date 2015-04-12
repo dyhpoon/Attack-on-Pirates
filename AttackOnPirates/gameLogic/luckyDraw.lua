@@ -132,11 +132,11 @@ function new(keysHaveText, keysNeededText, itemStat, soundEffect)
             soundEffect:play("openchest")
             hasDrawn = true
 
-            if numberOfKeysNeeded == 10 then
+            if numberOfKeysNeeded == 20 then
                 assignChestAwards(threeChests, "t1")
-            elseif numberOfKeysNeeded == 20 then
+            elseif numberOfKeysNeeded == 40 then
                 assignChestAwards(threeChests, "t2")
-            elseif numberOfKeysNeeded == 30 then
+            elseif numberOfKeysNeeded == 60 then
                 assignChestAwards(threeChests, "t3")
             end
 
@@ -158,7 +158,7 @@ function new(keysHaveText, keysNeededText, itemStat, soundEffect)
             updateAwards(event.target.awardType, event.target.awardSize)
 
             local awardPopup = display.newImage(event.target.awardImage)
-            awardPopup:setReferencePoint(display.CenterReferencePoint)
+            awardPopup.anchorX, awardPopup.anchorY = .5, .5
             awardPopup.x = event.target.x
             awardPopup.y = event.target.y + 20
             group:insert(awardPopup)
@@ -226,7 +226,7 @@ function new(keysHaveText, keysNeededText, itemStat, soundEffect)
 
     local function drawArrow(x, y)
         local arrow = display.newImageRect("images/drawArrowdown.png", 34, 26)
-        arrow:setReferencePoint(display.CenterReferencePoint)
+        arrow.anchorX, arrow.anchorY = .5, .5
         arrow.x = x
         arrow.y = y - 30
         arrowMoveUpAndDown(arrow)
@@ -238,19 +238,19 @@ function new(keysHaveText, keysNeededText, itemStat, soundEffect)
         local group = display.newGroup()
 
         local firstChest = drawChest(1)
-        firstChest:setReferencePoint(display.CenterReferencePoint)
+        firstChest.anchorX, firstChest.anchorY = .5, .5
         firstChest.x = 90
         firstChest.y = 350
         group:insert(firstChest)
 
         local secondChest = drawChest(2)
-        secondChest:setReferencePoint(display.CenterReferencePoint)
+        secondChest.anchorX, secondChest.anchorY = .5, .5
         secondChest.x = 162
         secondChest.y = 350
         group:insert(secondChest)
 
         local thirdChest = drawChest(3)
-        thirdChest:setReferencePoint(display.CenterReferencePoint)
+        thirdChest.anchorX, thirdChest.anchorY = .5, .5
         thirdChest.x = 235
         thirdChest.y = 350
         group:insert(thirdChest)

@@ -20,26 +20,26 @@ function new(streakBonus)
  	local isDead = false
 
 	local greyBar = display.newRect(0, 0, barWidth, 11)
-	greyBar:setReferencePoint(display.TopLeftReferencePoint)
+	greyBar.anchorX, greyBar.anchorY = 0, 0
 	greyBar.x = barXPosition
 	greyBar.y = barYposition
-	greyBar:setFillColor(125, 125, 125)
+	greyBar:setFillColor(125/255, 125/255, 125/255)
 	healthView:insert(greyBar)
 
 	local redBar = display.newRect(0, 0, barWidth, 11)
-	redBar:setReferencePoint(display.TopLeftReferencePoint)
+	redBar.anchorX, redBar.anchorY = 0, 0
 	redBar.x = barXPosition
 	redBar.y = barYposition
-	redBar:setFillColor(255, 0, 0, 220)
+	redBar:setFillColor(255/255, 0/255, 0/255, 220/255)
 	healthView:insert(redBar)
 	
 	local healthText = display.newText("0/0", 0, 0, "impact",13)
-	healthText:setReferencePoint(display.BottomRightReferencePoint)
+	healthText.anchorX, healthText.anchorY = 1, 1
 	healthText.x = 305
 	healthText.y = 125
 	healthView:insert(healthText)
 
-	healthView:setReferencePoint(display.TopLeftReferencePoint)
+	healthView.anchorX, healthView.anchorY = 0, 0
 	healthViewXPosition = healthView.x
 	healthViewYPosition = healthView.y
 
@@ -59,7 +59,7 @@ function new(streakBonus)
 		self.currentHealth = current
 		local newHealthText = current .. "/" .. max
 		healthText.text = newHealthText
-		healthText:setReferencePoint(display.BottomRightReferencePoint)
+		healthText.anchorX, healthText.anchorY = 1, 1
 		healthText.x = 305
 		healthText.y = 125
 
@@ -85,7 +85,7 @@ function new(streakBonus)
 			group:setHealth(self.currentHealth-n, self.maxHealth)
 
 			local minusHpText = display.newText("- " .. n, 0, 0, "verdana", 13)
-			minusHpText:setTextColor(255, 0, 0)
+			minusHpText:setTextColor(255/255, 0/255, 0/255)
 			minusHpText.x = 280
 			minusHpText.y = 112
 			group:insert(minusHpText)
@@ -97,7 +97,7 @@ function new(streakBonus)
 			end
 			transition.to(minusHpText, {time=600, y=minusHpText.y-50, x=minusHpText.x+math.random(-20, 20), onComplete=removeMinusHpText})
 
-			healthView:setReferencePoint(display.TopLeftReferencePoint)
+			healthView.anchorX, healthView.healthView = 0, 0
 			transition.to(healthView, {time=60, x=healthViewXPosition+math.random(-10, 10), y=healthViewYPosition+math.random(-10, 10)})
 			transition.to(healthView, {time=60, delay=60, x=healthViewXPosition, y=healthViewYPosition})
 		end
@@ -106,8 +106,8 @@ function new(streakBonus)
 	local function textAnimation(hp)
 		if hp > 0 then
 			local addHpText = display.newText("+ " .. hp, 0, 0, "impact", 13)
-			addHpText:setReferencePoint(display.CenterReferencePoint)
-			addHpText:setTextColor(0, 255, 0)
+			addHpText.anchorX, addHpText.anchorY = .5, 5
+			addHpText:setTextColor(0/255, 255/255, 0/255)
 			addHpText.x = 160
 			addHpText.y = 115
 			addHpText.xScale = 2

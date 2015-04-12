@@ -2,15 +2,31 @@ module(..., package.seeall)
 
 local json = require "json"
 local toast = require 'gameLogic.toast'
+local crypto = require "crypto"
+local openssl = require "plugin.openssl"
+local mime = require "mime"
+local cipher = openssl.get_cipher ( "aes-256-cbc" )
 
-local filename = "gamedata.json"
+local deviceID = system.getInfo("deviceID")
+local filename = "pirateMatchThree.json"
+local myPassword = "HiMyName1sD4rren~"
+
+local function createPassword()
+	local hash = crypto.digest(crypto.sha512, deviceID)
+	local passwordHash = crypto.digest(crypto.sha512, myPassword)
+	local finalPassword = crypto.digest(crypto.sha512, hash .. passwordHash)
+	return finalPassword
+end
 
 local function save(t)
 	local path = system.pathForFile(filename, system.DocumentsDirectory)
 	local file = io.open(path, "w")
 	if file then
 		local contents = json.encode(t)
-		file:write(contents)
+		local finalPassword = createPassword()
+		local encryptedContents = mime.b64(cipher:encrypt(contents, finalPassword))
+		--file:write(contents)
+		file:write(encryptedContents)
 		io.close(file)
 		return true
 	else
@@ -18,8 +34,10 @@ local function save(t)
 	end
 end
 
+--local phoneID = system.getInfo("deviceID")
+
 local function createNewGameSave()
-	print("created a new file")
+
 	local gameSettings = {
 		["phoneID"] = system.getInfo("deviceID"),
 		["charLevel"] = 1,
@@ -31,7 +49,7 @@ local function createNewGameSave()
 		["currentEnergy"] = 5,
 		["dailyRewardRecord"] = {},
 		["survivalRecord"] = 0,
-		["storyLevel"] = 0,
+		["storyLevel"] = -1,
 		["expBonus"] = 0,
 		["redPot1"] = 10,
 		["redPot2"] = 5,
@@ -57,7 +75,9 @@ local function load()
 	end
 
 	local contents = file:read("*a")
-	myTable = json.decode(contents)
+	local finalPassword = createPassword()
+	local decryptedContents = cipher:decrypt(mime.unb64(contents), finalPassword)
+	myTable = json.decode(decryptedContents)
 	io.close(file)
 	return myTable
 		
@@ -79,7 +99,7 @@ function get(key)
 	if pcall(checkSave) then
 		return myTable[key]
 	else
-		print("data corrupted")
+
 		createNewGameSave()
 		toast.new("ERROR: Game data is corrupted, reinitializing...", 10000)
 		return get(key)

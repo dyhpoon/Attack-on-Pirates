@@ -16,8 +16,8 @@ function new(soundEffect)
 	end
 
 	local hiddenScreen = display.newRect(0,0, _W*2, _H*2)
-	hiddenScreen:setFillColor(0, 0, 0)
-	hiddenScreen:setReferencePoint(display.CenterReferencePoint)
+	hiddenScreen:setFillColor(0/255, 0/255, 0/255)
+	hiddenScreen.anchorX, hiddenScreen.anchorY = .5, .5
 	hiddenScreen.x = display.contentCenterX
 	hiddenScreen.y = display.contentCenterY
 	hiddenScreen.alpha = 0.4
@@ -25,10 +25,10 @@ function new(soundEffect)
 	group:insert(hiddenScreen)
 
 	local backgroundScreen = display.newRoundedRect(0, 0, _W*2, 380, 5)
-	backgroundScreen:setReferencePoint( display.CenterReferencePoint )
+	backgroundScreen.anchorX, backgroundScreen.anchorY = .5, .5
 	backgroundScreen.x = display.contentCenterX
 	backgroundScreen.y = display.contentCenterY + 55
-	backgroundScreen:setFillColor(0, 0, 0)
+	backgroundScreen:setFillColor(0/255, 0/255, 0/255)
 	backgroundScreen.alpha = 0.65
 	backgroundScreen:addEventListener("touch", hiddenScreenTouchListener)
 	group:insert(backgroundScreen)
@@ -54,11 +54,11 @@ function new(soundEffect)
 		if isAndroid then
 			desiredFont = "Arial-Black"
 		else
-			desiredFont = "Arial Black"
+			desiredFont = "Arial Rounded MT Bold"
 		end
 		for i = 1, #victoryTable, 1 do
 			local endGameText = customText.new(victoryTable[i], 0, 0, desiredFont, 40, 255, 255, 102)
-			endGameText:setReferencePoint(display.CenterReferencePoint)
+			endGameText.anchorX, endGameText.anchorY = .5, .5
 			endGameText.xPosn = 35*i + 5
 			endGameText.yPosn = 65
 			endGameText.alpha = 0
@@ -77,11 +77,11 @@ function new(soundEffect)
 		if isAndroid then
 			desiredFont = "Arial-Black"
 		else
-			desiredFont = "Arial Black"
+			desiredFont = "Arial Rounded MT Bold"
 		end
 		for i = 1, #defeatTable, 1 do
 			local endGameText = customText.new(defeatTable[i], 0, 0, desiredFont, 40, 255, 255, 102)
-			endGameText:setReferencePoint(display.CenterReferencePoint)
+			endGameText.anchorX, endGameText.anchorY = .5, .5
 			endGameText.xPosn = 35*i + 25
 			endGameText.yPosn = 65
 			endGameText.alpha = 0

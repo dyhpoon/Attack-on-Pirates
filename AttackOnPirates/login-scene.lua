@@ -1,9 +1,3 @@
---[[
-
-The login scene of the game
-
---]]
-
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -52,16 +46,17 @@ local leapYear = {
     2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048, 2052, 2056
 }
 local dayXPosition = {
-    19, 59, 99, 139, 179, 219, 259
+    40, 80, 120, 160, 200, 240, 280
 }
 local dayYPosition = {
-    120, 158, 196, 234, 272, 310
+    137, 175, 213, 251, 289, 327
 }
 local localDay = tonumber(os.date("%d"))
 local localMonth = tonumber(os.date("%m"))
 local localYear = tonumber(os.date("%Y"))
 local remoteDay, remoteMonth, remoteYear -- today's date, from remote resources
 --local timeServerUrl = "http://json-time.appspot.com/time.json?tz=Hongkong" -- (this site always crashes)
+--local timeServerUrl = "https://myapp-cgtesting.rhcloud.com/coffeegame/time.php" (this was the url of server that i set up, but deprecated)
 local timeServerUrl = "https://api.facebook.com/method/fql.query?query=SELECT+now%28%29+FROM+link_stat+WHERE+url+%3D+%271.2%27&format=json"
 local isSuccessfullyGetRemoteTime = false
 local todaysAward
@@ -127,9 +122,9 @@ local function collectButtonListener(event)
         if isUsingRemoteTime then
             if todaysAwardIsNotYetClaimed() then
                 giveAward(todaysAward)
-                toast.new("Congratulations! You just claimed your reward", 3000)
+                toast.new("Congratulations! You just collected your reward", 3000)
             else
-                toast.new("Sorry! You've already claimed your reward", 3000)
+                toast.new("Sorry! You've already collected your reward", 3000)
             end
             
         else
@@ -141,7 +136,11 @@ end
 local function skipButtonListener(event)
     if event.phase == "began" then
         soundEffect:play("button")
-        storyboard.gotoScene("home-scene", "fade", 800)
+        if localStorage.get("storyLevel") == -1 then
+            storyboard.gotoScene("tutorial-scene", "fade", 800)
+        else
+            storyboard.gotoScene("home-scene", "fade", 800)
+        end
     end
 end
 
@@ -149,7 +148,7 @@ local function drawCalendarLayout()
     local group = display.newGroup()
 
     local calendarLayout = display.newImageRect("images/calendar/calendarscreen.png", display.contentWidth, display.contentHeight)
-    calendarLayout:setReferencePoint(display.CenterReferencePoint)
+    calendarLayout.anchorX, calendarLayout.anchorY = .5, .5
     calendarLayout.x = display.contentCenterX
     calendarLayout.y = display.contentCenterY
     group:insert(calendarLayout)
@@ -200,16 +199,16 @@ local function createDaysRect(i,j,day,isCurrentMonth, award)
 
 
     local dayRect = display.newRect(i, j, 40, 38)
-    dayRect:setReferencePoint(display.TopLeftReferencePoint)
+    dayRect.anchorX, dayRect.anchorY = 0, 0
     group:insert(dayRect)
 
     dayRect.alpha = 1
 
     local dayText = display.newText(day, 0, 0, "geneva", 7)
-    dayText:setReferencePoint(display.CenterReferencePoint)
+    dayText.anchorX, dayText.anchorY = .5, .5
     dayText.x = dayRect.x + 9
     dayText.y = dayRect.y + 5
-    dayText:setTextColor(0, 0, 0)
+    dayText:setTextColor(0/255, 0/255, 0/255)
     group:insert(dayText)
 
     if isCurrentMonth then
@@ -225,63 +224,63 @@ local function createDaysRect(i,j,day,isCurrentMonth, award)
     end
 
     if isCurrentMonth and day == today() then
-        dayRect:setFillColor(51, 102, 51, 200)
+        dayRect:setFillColor(51/255, 102/255, 51/255, 200/255)
         --dayRect:setFillColor(math.random(255), math.random(255), math.random(255), 100)
         todaysAward = award
     elseif isCurrentMonth then
         --dayRect:setFillColor(math.random(255), math.random(255), math.random(255), 100)
-        dayRect:setFillColor(235, 151, 40, 100)
+        dayRect:setFillColor(235/255, 151/255, 40/255, 100/255)
     else
         --dayRect:setFillColor(math.random(255), math.random(255), math.random(255), 100)
-        dayRect:setFillColor(102, 102, 102, 100)
+        dayRect:setFillColor(102/255, 102/255, 102/255, 100/255)
     end
 
-    dayRect:setReferencePoint(display.CenterReferencePoint)
+    dayRect.anchorX, dayRect.anchorY = .5, .5
     if award == "coins" then
         dayRect.award = display.newImageRect("images/calendar/calendarCoins.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "chest" then
         dayRect.award = display.newImageRect("images/calendar/calendarChest.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "key" then
         dayRect.award = display.newImageRect("images/calendar/calendarKey.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "bluePots" then
         dayRect.award = display.newImageRect("images/calendar/calendarMana.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "redPots" then
         dayRect.award = display.newImageRect("images/calendar/calendarPotion.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "completed" then
         dayRect.award = display.newImageRect("images/calendar/calendarComplete.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "exp" then
         dayRect.award = display.newImageRect("images/calendar/calendarExp.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
     elseif award == "stamp" then
         dayRect.award = display.newImageRect("images/calendar/calendarStamp.png", 30,23)
-        dayRect.award:setReferencePoint(display.CenterReferencePoint)
+        dayRect.anchorX, dayRect.anchorY = .5, .5
         dayRect.award.x = dayRect.x + 1
         dayRect.award.y = dayRect.y + 3
         group:insert(dayRect.award)
@@ -306,10 +305,10 @@ local function drawCalendar(yr, mh)  -- year and month
 
     -- month
     local monthText = display.newText(month[mh], 0, 0, native.systemFont, 18)
-    monthText:setReferencePoint(display.CenterReferencePoint)
+    monthText.anchorX, monthText.anchorY = .5, .5
     monthText.x = display.contentCenterX
     monthText.y = display.contentCenterY - 175
-    monthText:setTextColor(80, 80, 80)
+    monthText:setTextColor(80/255, 80/255, 80/255)
     group:insert(monthText)
 
     -- find the last day of the month
@@ -387,7 +386,6 @@ local function getRemoteTime()
     local requestUrl = timeServerUrl
     local response = http.request(requestUrl)
     if response == nil then
-        print("Network error!")
         return false
     else
         local dateTable = {}
@@ -435,7 +433,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
     local group = self.view
-    print("loginStampeScene")
 end
 
 
@@ -466,12 +463,10 @@ end
 -- Called prior to the removal of scene's "view" (display group)
 function scene:destroyScene( event )
     local group = self.view
-    print("destroy loginStampeScene: " .. group.numChildren)
     for i=group.numChildren, 1, -1 do
         group[i]:removeSelf()
         group[i] = nil
     end
-    print("destroy loginStampeScene: " .. group.numChildren)
     group:removeSelf()
     group = nil
     self.view = nil

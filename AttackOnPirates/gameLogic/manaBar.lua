@@ -13,26 +13,26 @@ function new()
 	group.currentMana = 100
  
 	local greyBar = display.newRect(0, 0, barWidth, 11)
-	greyBar:setReferencePoint(display.TopLeftReferencePoint)
+	greyBar.anchorX, greyBar.anchorY = 0, 0
 	greyBar.x = barXPosition
 	greyBar.y = barYposition
- 	greyBar:setFillColor(125, 125, 125)
+ 	greyBar:setFillColor(125/255, 125/255, 125/255)
  	manaView:insert(greyBar)
 
 	local blueBar = display.newRect(0, 0, barWidth, 11)
-	blueBar:setReferencePoint(display.TopLeftReferencePoint)
+	blueBar.anchorX, blueBar.anchorY = 0, 0
 	blueBar.x = barXPosition
 	blueBar.y = barYposition
-	blueBar:setFillColor(0, 0, 255, 220)
+	blueBar:setFillColor(0/255, 0/255, 255/255, 220/255)
 	manaView:insert(blueBar)
  
 	local manaText = display.newText("0/0", 0, 0, "impact",13)
-	manaText:setReferencePoint(display.BottomRightReferencePoint)
+	manaText.anchorX, manaText.anchorY = 1, 1
 	manaText.x = 305
 	manaText.y = 139
 	manaView:insert(manaText)
 
-	manaView:setReferencePoint(display.TopLeftReferencePoint)
+	manaView.anchorX, manaView.anchorY = 0, 0
 	manaViewXPosition = manaView.x
 	manaViewYPosition = manaView.y
 	group:insert(manaView)
@@ -49,7 +49,7 @@ function new()
 		self.currentMana = current
 		local newManaText = current .. "/" .. max
 		manaText.text = newManaText
-		manaText:setReferencePoint(display.BottomRightReferencePoint)
+		manaText.anchorX, manaText.anchorY = 1, 1
 		manaText.x = 305
 		manaText.y = 139
 	end
@@ -63,8 +63,8 @@ function new()
 			n = math.min(100, n*2)
 			group:setMana(self.currentMana+n, 100)
 			local addMpText = display.newText("+ " .. n, 0, 0, "impact", 13)
-			addMpText:setReferencePoint(display.CenterReferencePoint)
-			addMpText:setTextColor(153, 0, 255)
+			addMpText.anchorX, addMpText.anchorY = .5, .5
+			addMpText:setTextColor(153/255, 0/255, 255/255)
 			addMpText.x = 160
 			addMpText.y = 129
 			addMpText.xScale = 2

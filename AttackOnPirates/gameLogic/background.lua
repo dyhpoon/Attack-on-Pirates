@@ -22,7 +22,7 @@ function new()
 
 	for a = 1, 5, 1 do
 		local newBackground = display.newImageRect("images/ingameBg3.png", 140, runnerGameHeight)
-		newBackground:setReferencePoint(display.TopLeftReferencePoint)
+		newBackground.anchorX, newBackground.anchorY = 0, 0
 
 		newBackground.x = (a * 138) - (138 * 2)
 		newBackground.y = yPosition
@@ -51,7 +51,7 @@ function new()
 					end
 
 					local newBackground = display.newImageRect(imagePath, 140, runnerGameHeight)
-					newBackground:setReferencePoint(display.TopLeftReferencePoint)
+					newBackground.anchorX, newBackground.anchorY = 0, 0
 
 					newBackground.x = blocks[blocks.numChildren].x + 138
 					newBackground.y = yPosition

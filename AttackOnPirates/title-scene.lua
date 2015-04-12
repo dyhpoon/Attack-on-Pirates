@@ -1,10 +1,3 @@
---[[
-
-Showing game title
-
---]]
-
----------------------------FASTFORWARD REF-------------------------------------
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -13,8 +6,6 @@ local _W = display.contentWidth
 local _H = display.contentHeight
 local otherSoundEffect = require 'gameLogic.otherSoundEffect'
 local soundEffect
----------------------------------------------------------------------------------
-
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
@@ -38,7 +29,7 @@ function scene:createScene( event )
         overFile = "images/buttons/buttonStartonclick.png",
         onEvent = startButtonListener,
     }
-    startButton:setReferencePoint(display.CenterReferencePoint)
+    startButton.anchorX, startButton.anchorY = .5, .5
     startButton.x = display.contentCenterX
     startButton.y = 405
     group:insert(startButton)
@@ -48,7 +39,6 @@ end
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
-    print("title-scene")
     local group = self.view
 
 end

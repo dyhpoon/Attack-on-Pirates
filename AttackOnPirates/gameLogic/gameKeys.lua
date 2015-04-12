@@ -7,7 +7,7 @@ function new()
 
 	local numOfKeys = localStorage.get("keys")
 
-	local keysText = display.newText("", 153, 151, native.systemFont, 9)
+	local keysText = display.newText("", 153, 156, native.systemFont, 9)
 	keysText.text = numOfKeys
 	group:insert(keysText)
 

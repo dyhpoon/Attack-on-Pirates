@@ -21,22 +21,22 @@ function new(soundEffect)
 	local currentLevel = localStorage.get("charLevel")
 	local currentExp = localStorage.get("charExp")
 
-	local levelText = display.newText("", 85, 13, native.systemFont, 9)
+	local levelText = display.newText("", 85, 18, native.systemFont, 9)
 	levelText.text = currentLevel
 	group:insert(levelText)
 
 	local greyBar = display.newRect(0, 0, barWidth, 2)
-	greyBar:setReferencePoint(display.CenterReferencePoint)
+	greyBar.anchorX, greyBar.anchorY = .5, .5
 	greyBar.x = barXPosition
 	greyBar.y = barYposition
-	greyBar:setFillColor(125, 125, 125)
+	greyBar:setFillColor(125/255, 125/255, 125/255)
 	group:insert(greyBar)
 
 	local yellowBar = display.newRect(0, 0, barWidth, 2)
-	yellowBar:setReferencePoint(display.CenterLeftReferencePoint)
+	yellowBar.anchorX, yellowBar.anchorY = 0, .5
 	yellowBar.x = barXPosition - greyBar.width/2 --greyBar.xReference --barXPosition
 	yellowBar.y = barYposition
-	yellowBar:setFillColor(255, 153, 51, 220)
+	yellowBar:setFillColor(255/255, 153/255, 51/255, 220/255)
 	group:insert(yellowBar)
 	
 	if currentLevel == maxLevel then
@@ -72,7 +72,7 @@ function new(soundEffect)
 			--localStorage.saveWithKey("charLevel", currentLevel)
 			--localStorage.saveWithKey("charExp", 0)
 			levelText.text = currentLevel
-			levelText:setReferencePoint(display.CenterReferencePoint)
+			levelText.anchorX, levelText.anchorY = .5, .5
 			levelText.x = 83
 			levelText.y = 20
 			addExpBy(remainingExp)

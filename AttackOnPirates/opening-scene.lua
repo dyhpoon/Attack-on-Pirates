@@ -1,9 +1,3 @@
---[[
-
-Showing the company logo at start
-
---]]
-
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
@@ -19,7 +13,7 @@ function scene:createScene( event )
     local group = self.view
 
     local companyLogoImage = display.newImageRect("images/companylogo.png", display.contentWidth, display.contentHeight)
-    companyLogoImage:setReferencePoint(display.CenterReferencePoint)
+    companyLogoImage.anchorX, companyLogoImage.anchorY = .5, .5
     companyLogoImage.x = display.contentCenterX
     companyLogoImage.y = display.contentCenterY
     group:insert(companyLogoImage)
@@ -30,7 +24,7 @@ end
 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
-    print("opening-scene")
+
     local group = self.view
 
 end

@@ -3,7 +3,6 @@
 -- 
 -- Author: Darren Poon
 -- email : dyhpoon@gmail.com
--- Copyright 2013 Coffee Games. All rights reserved.
 ---------------------------------------------------------------------------------
 display.setStatusBar( display.HiddenStatusBar )
 
@@ -35,12 +34,12 @@ storyboard.state.font = fontName
 local marginY = math.abs(display.screenOriginY)
 if marginY > 0 then
 	local topMarginYImage = display.newImageRect("images/marginImageY.png", display.contentWidth, marginY)
-	topMarginYImage:setReferencePoint(display.BottomCenterReferencePoint)
+	topMarginYImage.anchorX, topMarginYImage.anchorY = .5, 1
 	topMarginYImage.x = display.contentCenterX
 	topMarginYImage.y = 0
 
 	local bottomMarginYImage = display.newImageRect("images/marginImageY.png", display.contentWidth, marginY)
-	bottomMarginYImage:setReferencePoint(display.TopCenterReferencePoint)
+	bottomMarginYImage.anchorX, bottomMarginYImage.anchorY = .5, 0
 	bottomMarginYImage.x = display.contentCenterX
 	bottomMarginYImage.y = display.contentHeight
 end
@@ -48,31 +47,31 @@ end
 local marginX = math.abs(display.screenOriginX)
 if marginX > 0 then
 	local leftMarginXImage = display.newImageRect("images/marginImageX.png", marginX, display.contentHeight)
-	leftMarginXImage:setReferencePoint(display.CenterRightReferencePoint)
+	leftMarginXImage.anchorX, leftMarginXImage.anchorY = 1, .5
 	leftMarginXImage.x = 0
 	leftMarginXImage.y = display.contentCenterY
 
 	local rightMarginXImage = display.newImageRect("images/marginImageX.png", marginX, display.contentHeight)
-	rightMarginXImage:setReferencePoint(display.CenterLeftReferencePoint)
+	rightMarginXImage.anchorX, rightMarginXImage.anchorY = 0, .5
 	rightMarginXImage.x = display.contentWidth
 	rightMarginXImage.y = display.contentCenterY
 end
-
 -------------------------------------------------------------
 
 --storyboard.isDebug = true
 --Runtime:addEventListener( "enterFrame", storyboard.printMemUsage )
 
 -- load first screen
-storyboard.gotoScene( "opening-scene", "fade", 800 )
---storyboard.gotoScene("game-scene")
+-- storyboard.gotoScene( "opening-scene", "fade", 800 )
+-- storyboard.gotoScene("game-scene")
 --storyboard.gotoScene("result-scene")
 --storyboard.gotoScene("leaderboard-scene")
---storyboard.gotoScene("login-scene")
---storyboard.gotoScene("home-scene")
---storyboard.gotoScene("shop-scene")
---storyboard.gotoScene("story-scene")
---storyboard.gotoScene("title-scene")
+-- storyboard.gotoScene("login-scene")
+-- storyboard.gotoScene("home-scene")
+-- storyboard.gotoScene("shop-scene")
+-- storyboard.gotoScene("story-scene")
+-- storyboard.gotoScene("title-scene")
+storyboard.gotoScene("title-scene", "fade", 800)
 --storyboard.gotoScene("IAP-scene")
 --storyboard.gotoScene("tutorial-scene")
 ---------------------------------------------------------------------------------

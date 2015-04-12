@@ -4,11 +4,12 @@ function new()
 	local timers = {}
 	local group = display.newGroup()
 	local threshold = 1
-	local gemYPosition = 138
+	local gemYPosition = 159
+	local gemXPosition = 19
 
 	function group:createTile(i, j)
-		local rect = display.newRect(i*40-40, j*40+gemYPosition - 20, 40, 40)
-		rect:setFillColor(255, 255, 255)
+		local rect = display.newRect(i*40-40+gemXPosition, j*40+gemYPosition - 20, 40, 40)
+		rect:setFillColor(255/255, 255/255, 255/255)
 		rect.isFlashing = true
 		rect.alpha = 0
 		self:insert(rect)

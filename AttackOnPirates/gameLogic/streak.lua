@@ -12,7 +12,7 @@ function new()
 	local highestStreak = 0
 
 	local streakText = display.newText( "STREAK:", 0, 0, "impact", 13 )
-	streakText:setReferencePoint(display.BottomRightReferencePoint)
+	streakText.anchorX, streakText.anchorY = 1, 1
 	streakText.alpha = 0
 	streakText.x = streakTextXPosition
 	streakText.y = streakTextYPosition

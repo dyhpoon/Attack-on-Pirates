@@ -21,8 +21,9 @@ function new(x,y,w,h,monsters,chests,hostages,stageInformation)
 
 	-- grey bar (background)
 	local greyBar = display.newRoundedRect(x, y, w, h, 4)
+	greyBar.anchorX, greyBar.anchorY = 0, 0
 	group:insert(greyBar)
-	greyBar:setFillColor(102, 102, 102)
+	greyBar:setFillColor(102/255, 102/255, 102/255)
 
 	-- initializing
 	local function initMinimap()
@@ -34,13 +35,14 @@ function new(x,y,w,h,monsters,chests,hostages,stageInformation)
 				xPosition = ((w - w/30)/gameTime * bossInfo[4]) + w/30
 				--boss = display.newCircle(xPosition, greyBar.y, 5)
 				boss = display.newImage("images/mainBossicon.png")
-				boss.x = xPosition + 13
+				boss.anchorX, boss.anchorY = 0, 0
+				boss.x = xPosition + 12
 				boss.y = greyBar.y
 				boss.health = bossInfo[2]
 				boss.damage = bossInfo[3]
 				boss.id = bossInfo[1]
 				boss.isSpawned = false
-				boss:setFillColor(255,255,0)
+				boss:setFillColor(255/255,255/255,0/255)
 				group:insert(boss)
 			end
 		end
@@ -50,6 +52,7 @@ function new(x,y,w,h,monsters,chests,hostages,stageInformation)
 
 	-- main character icon
 	local mainCharacter = display.newImage("images/mainCharicon.png")
+	mainCharacter.anchorX, mainCharacter.anchorY = 0, 0
 	mainCharacter.x = w/30
 	mainCharacter.y = greyBar.y
 	group:insert(mainCharacter)
@@ -143,7 +146,6 @@ function new(x,y,w,h,monsters,chests,hostages,stageInformation)
 
 	-- delete a dot (boss) if it is eliminated
 	function group:deleteADot()
-		print("deleting a dot")
 		inBossFight = false
 		boss:removeSelf()
 		boss = nil
@@ -157,7 +159,6 @@ function new(x,y,w,h,monsters,chests,hostages,stageInformation)
 				inBossFight = true
 				group:pause()
 				if not boss.isSpawned then
-					--print(boss.type .. " " .. boss.x)
 					boss.isSpawned = true
 					monsters:spawnMonster(boss.id, boss.health, boss.damage, true, 380)
 				end

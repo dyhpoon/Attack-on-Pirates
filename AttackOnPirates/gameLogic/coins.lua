@@ -5,7 +5,7 @@ function new()
 	group.coins = 0
 
 	local coinText = display.newText( "0" , 0, 0, "impact", 13 )
-	coinText:setReferencePoint(display.CenterRightReferencePoint)
+	coinText.anchorX, coinText.anchorY = 1, .5
 	coinText.x = 218
 	coinText.y = 15
 	coinText.text = group.coins
@@ -14,7 +14,7 @@ function new()
 	function group:setCoins(coins)
 		self.coins = coins
 		coinText.text = self.coins
-		coinText:setReferencePoint(display.CenterRightReferencePoint)
+		coinText.anchorX, coinText.anchorY = 1, .5
 		coinText.x = 218
 		coinText.y = 15
 	end
@@ -22,7 +22,7 @@ function new()
 	function group:increaseCoinsByN(n)
 		self.coins = self.coins + n
 		coinText.text = self.coins
-		coinText:setReferencePoint(display.CenterRightReferencePoint)
+		coinText.anchorX, coinText.anchorY = 1, .5
 		coinText.x = 218
 		coinText.y = 15
 	end

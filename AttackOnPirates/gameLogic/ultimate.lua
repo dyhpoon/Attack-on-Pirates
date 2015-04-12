@@ -37,7 +37,6 @@ function new(manaBar, monsters, mainChar, minimap)
 	local animatingUltimate = false
 	local animatingDeadSprite = false
 	function group:update()
-		--print(ultimate.sequence)
 		if mainChar:isDead() and not animatingDeadSprite then
 			animatingDeadSprite = true
 			ultimate:setSequence("endBuring")
