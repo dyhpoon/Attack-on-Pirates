@@ -11,7 +11,7 @@ About
 ============
 This is a mobile game which I wrote in my spare time when I was still studying in university. Since this project is no longer maintained, I apologize for any bugs or crashes if you encounter.
 
-Unfortunately, this game has already removed from the app store, but you can still get a glimpse of the gameplay by downloading this [apk](sample.apk) to your Android devices.
+Unfortunately, this game has already removed from the app store, but you can still get a glimpse of the gameplay by downloading this [apk](https://github.com/dyhpoon/game-project/raw/master/sample.apk) to your Android devices.
 
 Thanks
 ============
